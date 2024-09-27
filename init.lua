@@ -35,3 +35,37 @@ require "nvchad.autocmds"
 vim.schedule(function()
   require "mappings"
 end)
+
+local on_attach = require("nvchad.configs.lspconfig").on_attach
+-- local lspconfig = require "lspconfig"
+
+vim.g.rustaceanvim = {
+  -- Plugin configuration
+  tools = {
+    enable_clippy = true,
+    float_win_config = {
+      auto_focus = true,
+    },
+  },
+
+  -- LSP configuration
+  server = {
+    on_attach = on_attach,
+    default_settings = {
+      -- root_dir = lspconfig.util.root_pattern "Cargo.toml",
+      -- rust-analyzer language server configuration
+      ["rust-analyzer"] = {
+        hover = {
+          documentation = {
+            enable = true,
+          },
+        },
+        diagnostics = {
+          enable = false,
+        },
+      },
+    },
+  },
+  -- DAP configuration
+  dap = {},
+}
